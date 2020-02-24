@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {#    {{ dump(posts) }}#}
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <h1>LIst of all posts</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Quiz Number</td>
+            <td>Title</td>
+            <td>Category</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% set count = 1 %}
+            {% for post in posts %}
+                {% if post.category.id == id %}
+                    <tr>
+                        <td>{{ count }}</td>
+                        <td>
+                            <a href="{{ path('post.show',{id: post.id}) }}">
+                                {{ post.title }}
+                            </a>
+                        </td>
+                        <td>
+                                {{ post.category }}
+                        </td>
+                        <td>
+                            <a class="text-danger" href="{{ path('post.delete',{id: post.category}) }}">
+                                DELETE
+                            </a>
+
+                        </td>
+                    </tr>
+                    {% set count = count + 1 %}
+                {% endif %}
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{#    {{ dump(quizs) }}#}
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <h1>LIst of all quizs</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Category</td>
+            <td>Add questions</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for quiz in quizzes %}
+                    <tr>
+                        <td>{{ quiz.id }}</td>
+                        <td>
+                            <a href="{{ path('post.show',{id: quiz.id}) }}">
+                                {{ quiz.title }}
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="{{ path('post.categories',{id: quiz.category.id}) }}">
+                                {{ quiz.category}}
+                            </a>
+                        </td>
+                        <td>
+                            <a class="text-success" href="{{ path('makeQuestion')}}">
+                                New quastion for {{ quiz.title }}
+                                </a>
+                        </td>
+
+                        <td>
+                            <a class="text-danger" href="{{ path('post.delete',{id: quiz.id}) }}">
+                            DELETE
+                            </a>
+
+                        </td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

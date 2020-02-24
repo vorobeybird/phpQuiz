@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="display-4">Hello,{{ app.user.username }}!</h1>
+        <p class="lead">You got opportunity to participate in new {{ quiz.title }} ,id = {{ quiz.id }} quiz !</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p >
+            <a class="btn btn-primary btn-lg" href="{{ path ('quiz_interface',{quiz_id: quiz.id}) }}" role="button">Learn more</a>
+
+        </p>
+    <p>
+        <a class="btn btn-primary  float-right" href="{{ path('post.index')}}" role="button">Back</a>
+    </p>
+
+
+
+
+
+{% endblock %}
